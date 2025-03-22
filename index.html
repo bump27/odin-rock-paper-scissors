@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice(){
+            let random = Math.floor(Math.random()*3+1);
+            switch(random){
+                case 1:
+                    return "paper";
+                case 2: 
+                    return "scissors";
+                case 3:
+                    return "rock";
+            }
+        }
+        function getHumanChoice(){
+            return prompt("input: ").toLowerCase();
+        }
+        let humanScore = 0;
+        let computerScore = 0;
+        function playRound(){
+            let humanChoice = getHumanChoice();
+            let compChoice = getComputerChoice();
+            console.log("You played "+ humanChoice + ".");
+            console.log("CPU played " + compChoice + ".")
+            if (humanChoice === compChoice){
+                console.log("It was a tie! ");
+            } else if (humanChoice === "scissors" && compChoice === "rock"){
+                console.log("You lose!");
+                computerScore ++;
+            }else if(humanChoice === "rock" && compChoice === "paper"){
+                console.log("You lose!");
+                computerScore ++;
+            }else if(humanChoice === "paper" && compChoice === "scissors"){
+                console.log("You lose!");
+                computerScore ++;
+            }else{
+                console.log("You win!");
+                humanScore++;
+            }
+        }
+        for (let i = 0; i < 5; i++){
+            playRound();
+            console.log("Your Score: " + humanScore);
+            console.log("Computer Score: " + computerScore);
+        }
+
+    </script>
+</body>
+</html>
