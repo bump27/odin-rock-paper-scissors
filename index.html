@@ -6,6 +6,29 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="r">
+        <button>
+            Rock
+        </button>
+    </div>
+    <div class="p">
+        <button>
+            Paper
+        </button>
+    </div>
+    <div class="s">
+        <button>
+            Scissors
+        </button>
+    </div>
+    <div class = "choices"></div>
+    <div class="results">
+
+    </div>
+    <div class="score">
+
+    </div>
+    <div class = "winner"></div>
     <script>
         function getComputerChoice(){
             let random = Math.floor(Math.random()*3+1);
@@ -18,38 +41,56 @@
                     return "rock";
             }
         }
-        function getHumanChoice(){
-            return prompt("input: ").toLowerCase();
-        }
         let humanScore = 0;
         let computerScore = 0;
-        function playRound(){
-            let humanChoice = getHumanChoice();
+        function playRound(humanChoice){
+            if (humanScore === 5 || computerScore === 5){
+                return;
+            }
             let compChoice = getComputerChoice();
-            console.log("You played "+ humanChoice + ".");
-            console.log("CPU played " + compChoice + ".")
+            const choices = document.querySelector(".choices");
+            choices.textContent = "You played "+ humanChoice + ". CPU played " + compChoice + ".";
+            const r = document.querySelector(".results");
             if (humanChoice === compChoice){
+                r.textContent = "It was a tie!";
                 console.log("It was a tie! ");
             } else if (humanChoice === "scissors" && compChoice === "rock"){
-                console.log("You lose!");
-                computerScore ++;
+                r.textContent = "You lose!";
+                computerScore++;
             }else if(humanChoice === "rock" && compChoice === "paper"){
-                console.log("You lose!");
+                r.textContent = "You lose!";
                 computerScore ++;
             }else if(humanChoice === "paper" && compChoice === "scissors"){
-                console.log("You lose!");
+                r.textContent = "You lose!";
                 computerScore ++;
             }else{
-                console.log("You win!");
+                r.textContent = "You win!";
                 humanScore++;
             }
+            const s = document.querySelector(".score");
+            s.textContent = "Your Score: " + humanScore + ", " + "Computer Score: " + computerScore;
+            const win = document.querySelector(".winner");
+            if(computerScore === 5){
+                win.textContent = "Computer Wins!";
+            } else if (humanScore === 5){
+                win.textContent = "Human Wins!";
+            }
         }
-        for (let i = 0; i < 5; i++){
-            playRound();
-            console.log("Your Score: " + humanScore);
-            console.log("Computer Score: " + computerScore);
-        }
-
+        const rock = document.querySelector(".r");
+        rock.addEventListener("click", () => {
+            let humanChoice = "rock";
+            playRound(humanChoice);
+        });
+        const scissors = document.querySelector(".s");
+        scissors.addEventListener("click", () => {
+            let humanChoice = "scissors";
+            playRound(humanChoice);
+        });
+        const paper = document.querySelector(".p");
+        paper.addEventListener("click", () => {
+            let humanChoice = "paper";
+            playRound(humanChoice);
+        });
     </script>
 </body>
 </html>
